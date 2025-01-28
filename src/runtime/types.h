@@ -8,6 +8,8 @@ typedef struct Process {
     Function **GlobalFunctions;
     Variable **GlobalVariables;
     Struct **GlobalStructs;
+
+	char **ThreadInstPtrs;  // for multi-threading and process managemnt
 } Process;
 
 static Process **Processes;

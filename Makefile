@@ -1,6 +1,6 @@
 # Sphere Binary File
 
-CFLAGS = -g -static
+CFLAGS = -g -static -o3
 SBF_CSOURCE = $(shell find src -name '*.c')
 
 SBF_OBJ = $(patsubst src/%.c, bin/runtime.o, $(SBF_CSOURCE))
@@ -17,10 +17,10 @@ debug: rebuild
 	clear
 
 build:
-	gcc $(SBF_CFLAGS) $(SBF_CSOURCE) -o bin/runtime.o
+	clang $(SBF_CFLAGS) $(SBF_CSOURCE) -o bin/runtime.o
 	
 bin/src/%.o: src/%.c
-	gcc $(SBF_CFLAGS) $(SBF_CSOURCE) -o bin/runtime.o
+	clang $(SBF_CFLAGS) $(SBF_CSOURCE) -o bin/runtime.o
 
 clean:
 	-rm -rf ./bin/*
