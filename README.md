@@ -6,8 +6,9 @@ The runtime is an [SBF](sbf.md) interpreter that will implement its own standard
 The runtime will be constantly active  inside a freestanding environment. However, if inside an Operating System, not only will it load the OS's standard, but also check for any existing Sphere Runtime priocesses. If so, the sbe will be executed accordingly as a memory-block-contained software.
 
 Only through Runtime can SBFs load SBEs.
-
-# [TBA] Commands (Non-Freestanding)
+<br>
+<br>
+## [TBA] Commands (Non-Freestanding)
 |     comand                           |                             description                                  |
 |--------------------------------------|--------------------------------------------------------------------------|
 |`sphere start <dir/to/executable.sbe>`| runs the provided sbe                                                    |
