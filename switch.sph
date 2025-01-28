@@ -1,0 +1,55 @@
+main(source: string[]): int {
+    parse(lex(srource))
+}
+
+lex(source: string) {
+    #> Sets src as the result of source.split(), automatically 
+    assigning the type during value assignment <#
+    src = source.split()     
+
+    i: int = -1
+    buff: string = ""
+    toks: Token
+
+    while ++i < src.len {
+        switch src[i] {
+            '\"': {
+                while src[++i] != "\"": 
+                    buff += src[i]
+
+                toks.add(Token(TokenType.StringLit, .buff, .file, .line, .column))
+            }
+            ':': toks.add(Token(TokenType.Colon,    ":", .file, .line, .column))
+            '{': toks.add(Token(TokenType.LBrace,   "{", .file, .line, .column))
+            '}': toks.add(Token(TokenType.RBrace,   "}", .file, .line, .column))
+            '[': toks.add(Token(TokenType.LBracket, "[", .file, .line, .column))
+            ']': toks.add(Token(TokenType.RBracket, "]", .file, .line, .column))
+            default: {
+                if char.isnum(src[i]) 
+                    while char.isnum(src[++i]):
+                        buff += src[i]
+            }
+        }
+    }
+}
+
+TokenType: enum {
+    StringLit, 
+    IntLit,
+    BoolLit,
+
+    Colon,
+    LBrace,
+    RBrace,
+    LBracket,
+    RBracket,
+}
+
+Token = {
+    .Construct(type: TokenType, value: string, file: string, line: int, column: int)
+    | .Type = type
+    | .Value = value
+    | .File = file
+    | .Line = line
+    | .Column = column
+}

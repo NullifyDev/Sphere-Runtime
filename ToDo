@@ -1,0 +1,8 @@
+SBE must have 
+
+<!-- - Separate Data, Tag, constant and dynamic memory
+    - Let the runtime manage Tags
+    - User should only manage the 
+
+- function and variable table/"dictionary"
+    - ID | 16BitByte -->
