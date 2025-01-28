@@ -7,7 +7,7 @@ The runtime will be constantly active  inside a freestanding environment. Howeve
 
 Only through Runtime can SBFs load SBEs.
 
-# Commands (Non-Freestanding)
+# [TBA] Commands (Non-Freestanding)
 |     comand                           |                             description                                  |
 |--------------------------------------|--------------------------------------------------------------------------|
 |`sphere start <dir/to/executable.sbe>`| runs the provided sbe                                                    |
