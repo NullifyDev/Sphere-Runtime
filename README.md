@@ -31,5 +31,5 @@ The Data Memory and Function Memory is separated and placed in a random location
 
 
 ## Where to find me
-To keep yourself up to date with my language, please head over to [r/ProgrammingLanguages](https://discord.gg/MWjdg6GXRn) discord server within the `#sphere` channel under `PROJECTS Q-Y` Category
-I also have a Discord [community server](https://discord.gg/FQuqQTXhhm)
+To keep yourself up to date with my language, please head over to [r/ProgrammingLanguages](https://discord.gg/MWjdg6GXRn) discord server within the `#sphere` channel under `PROJECTS Q-Y` Category<br>
+I also have a [Discord community server](https://discord.gg/FQuqQTXhhm)
