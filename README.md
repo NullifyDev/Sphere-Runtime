@@ -28,3 +28,8 @@ Only through Runtime can SBFs load SBEs.
 ### Memory
 Each process has an address and length. The pointers within the process are indexed instead of giving absolute location (the true location of the pointer or object in question)
 The Data Memory and Function Memory is separated and placed in a random location within the memory.
+
+
+## Where to find me
+To keep yourself up to date with my language, please head over to [r/ProgrammingLanguages](https://discord.gg/MWjdg6GXRn) discord server within the `#sphere` channel under `PROJECTS Q-Y` Category
+I also have a Discord [community server](https://discord.gg/FQuqQTXhhm)
