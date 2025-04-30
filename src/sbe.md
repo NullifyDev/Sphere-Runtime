@@ -11,12 +11,12 @@ size 16
 entry main int
 
 [dependency]
-./deps/path/to/file.sbf
-./deps/path/to/directory
-./deps/path/to/directory/*
-./deps/path/to/directory/*/.../
-./deps/path/to/directory/...*/
-./deps/path/to/directory/sub.../
+deps/path/to/file.sbf
+deps/path/to/directory
+deps/path/to/directory/*
+deps/path/to/directory/*/.../
+deps/path/to/directory/...*/
+deps/path/to/directory/sub.../
 
 [blacklist]
 # to prevent loading
