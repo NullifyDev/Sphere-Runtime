@@ -7,19 +7,27 @@ This file contains hashes of different associated/related SBF and SBE files of t
 
 # Example 
 ```
-size 16 
+size 16
 entry main int
 
-nofivaldi
-
-[whitelist]
-path/to/exempt/file.sbf
-mod/*/mymod.[sbf/sbe]   # * wild card for "any folder"
-
-mod/mymod.sbe  # Prioritizes first extension 
-mod/mymod.sbf 
+[dependency]
+./deps/path/to/file.sbf
+./deps/path/to/directory
+./deps/path/to/directory/*
+./deps/path/to/directory/*/.../
+./deps/path/to/directory/...*/
+./deps/path/to/directory/sub.../
 
 [blacklist]
-path/to/excluded/file.sbf
-mod.BAK/*
+# to prevent loading
+
+[whitelist]
+# to allow loading
 ```
+|    Syntax    | Description                                                                                            |
+|--------------|--------------------------------------------------------------------------------------------------------|
+|    `./*`     | All files and folders                                                                                  |
+|  `./*/.../`  | All files, folders and subdirectories (default depth: 1)                                               |
+|  `./...*/`   | recursive subdirectory traversal - `*` can be any number for max depth (default: unlimited)            |
+| `./sub...*/` | recursive subdirectory traversal under `sub` folder (max depth is `*`- default: unlimited)             |
+|  `./*...*/`  | Recursively all files, folders and subdirectories at any depth (max depth is `*`- default: unlimited)  |
