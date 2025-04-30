@@ -1,0 +1,58 @@
+#ifndef DATATYPE
+#define DATATYPE
+
+#ifdef __unix__ 
+    #include <stdio.h>
+#else 
+    #include "./../commands/print.h"
+#endif
+
+#define SIZE_T long unsigned int;
+typedef enum ByteKind {
+    BYTEKIND_NOOP,
+    BYTEKIND_HLT,
+    BYTEKIND_VOID,
+    BYTEKIND_INT,
+    BYTEKIND_FLOAT,
+    BYTEKIND_BOOL,
+    BYTEKIND_CHAR,
+    BYTEKIND_VAR,
+    BYTEKIND_FUNCTION,
+    BYTEKIND_STRUCT,
+    BYTEKIND_CALL,
+    BYTEKIND_UP,
+    BYTEKIND_DOWN,
+    BYTEKIND_MOV,
+    BYTEKIND_INCR,
+    BYTEKIND_DECR,
+    BYTEKIND_SET,
+    BYTEKIND_GET,
+    BYTEKIND_CMP,
+    BYTEKIND_EQ,
+    BYTEKIND_NE,
+    BYTEKIND_LT,
+    BYTEKIND_LE,
+    BYTEKIND_GT,
+    BYTEKIND_GE,
+    BYTEKIND_IS,
+    BYTEKIND_ISNT,
+    BYTEKIND_BLOCK,
+    BYTEKIND_OUT,
+    BYTEKIND_OUTLN,
+    BYTEKIND_LOOP,
+    BYTEKIND_CONCATENATE,
+    BYTEKIND_LOC,
+    BYTEKIND_INFO,
+    BYTEKIND_MODULO,
+
+} ByteKind;
+
+typedef enum DataType {
+    DATATYPE_VOID = 2,
+    DATATYPE_INT,
+    DATATYPE_FLOAT,
+    DATATYPE_BOOL,
+    DATATYPE_CHAR,
+} DataType;
+
+#endif

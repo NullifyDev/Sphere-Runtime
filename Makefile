@@ -1,7 +1,7 @@
 # Sphere Binary File
 
-CFLAGS = -g -static -o3
-CSOURCE = $(shell find src -name '*.c')
+CFLAGS = -std=c23 -g -static -o3 -Wall -pedantic -Werror      -Wno-newline-eof -Wno-unsequenced -Wno-return-stack-address -Wno-format-pedantic
+CSOURCE = $(shell find src/sbf src/runtime -name '*.c')
 
 OBJ = $(patsubst src/%.c, bin/runtime.o, $(CSOURCE))
 BIN = $(shell find bin -name '*.o')

@@ -1,0 +1,67 @@
+set addrloc, loc PROCESS
+get addrloc                             # may not be implemented
+
+<# if and if-else ternary
+cmp <obj1> <obj2>, <cmpCond> <trueBlock>  
+cmp <obj1> <obj2>, <cmpCond> <trueBlock>, <falseBlock>
+#>
+
+cmp res 1 eq block 1 trueblock
+
+cmp res 2 ne block 1 trueblock 
+             block 1 falseblock
+
+cmp res 3 lt block 1 trueblock 
+             block 1 falseblock
+
+cmp res 4 le block 1 trueblock 
+             block 1 falseblock
+
+cmp res 5 gt block 1 trueblock 
+             block 1 falseblock
+
+cmp res 6 ge block 1 trueblock 
+             block 1 falseblock
+
+# type comparison
+cmp res 2 is block 1 trueblock 
+             block 1 falseblock
+
+cmp res 2 isnt block 1 trueblock 
+               block 1 falseblock
+
+
+# because of the if ternary, the side effect allows you to do && and || 
+cmp le res 0 block 1
+cmp ge res 9 
+    block 1
+        print concatonate 2 var.int res string " is your number"
+    block 1
+        print concatonate 2 var.int res string " is not between 0 and 9
+
+cmp le res 0 block 2
+    cmp ge res 9 
+        block 1
+            print concatonate 2 var.int res string " is your number"
+        block 1 
+            print concatonate 2 var.int res string " is not between 0 and 9
+
+
+
+# function
+fizzbuzz 
+    block 2
+        set i 0
+        loop cmp i 100 le 
+            block 4
+                eq mod i 3 0 print fizz
+                eq mod i 5 0 print buzz
+                print 0xA
+                incr i
+
+int_compare 
+    block 4
+        set one poparg
+        set two poparg
+        set res cmp one two
+        ret res

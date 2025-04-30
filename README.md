@@ -18,3 +18,10 @@ Only through Runtime can SBFs load SBEs.
 |`sphere kill <dir/to/executable.sbe>` | kills all processes and frees the related memory entirely                |
 |`sphere pause <pid>`                  | pauses the process and skips its execution until resumed                 |
 |`sphere resume <pid>`                 | resumes the process and continues from the last instruction              |
+
+
+## Basics
+
+### Memory
+Each process has an address and length. The pointers within the process are indexed instead of giving absolute location (the true location of the pointer or object in question)
+The Data Memory and Function Memory is separated and placed in a random location within the memory.
