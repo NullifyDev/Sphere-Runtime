@@ -12,9 +12,8 @@
 #include "process/vmem.h"
 
 typedef struct Task {
-    unsigned int length;
+    unsigned int length, iter;
     char *content;
-    unsigned int iter;
 } Task;
 
 typedef struct Thread

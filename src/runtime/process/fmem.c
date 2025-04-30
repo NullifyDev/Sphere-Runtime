@@ -3,7 +3,7 @@
 FMem fmem_new(int capacity) {
 	FMem fmem;
 	
-	fmem.loc = calloc (sizeof (Function), capacity);
+	fmem.loc = calloc (capacity, sizeof(Function));
 	fmem.capacity = capacity;
 	fmem.count = 0;
 

@@ -2,26 +2,30 @@
 
 void *bytecode_mgr(Thread *thread, int len)
 {
+	/* so Line 11 fucks up the address of a COMPLETELY unrelated pointer (mem->loc) to 0x1, somehow. And Line 8 is the solution??????? 
+	WTAF is this Voodoo dogshit? THIS SHIT MAKES NO SENSE!!! 
+	If anyone asks about the purpose of Line 8, read line 5 again and DONT @ ME! */
+	Thread *t = thread;
 	int i = 0;
 	while (i < len) {
-		switch (thread->task.content[thread->task.iter]) {
+		switch (t->task.content[t->task.iter]) {
 		case BYTEKIND_FUNCTION:
-			int id = thread->task.content[++(thread->task.iter)];
-			if (fmem_hasId(thread->fmem, id) == false) {
+			int id = t->task.content[++(t->task.iter)];
+			if (fmem_hasId(t->fmem, id) == false) {
 				Function f;
 				f.id = id;
-				f.contents.length = thread->task.content[++thread->task.iter];
-				thread->fmem->loc[thread->fmem->count++] = f;
-				thread->task.iter++;
+				f.contents.length = t->task.content[++t->task.iter];
+				t->fmem->loc[thread->fmem->count++] = f;
+				t->task.iter++;
 			}
 			break;
 		case BYTEKIND_SET:
-			thread->task.iter++;
+			t->task.iter++;
 			bytecode_mgr(thread, 2);
 			break;
 		case BYTEKIND_VAR:
-			id = thread->task.content[++thread->task.iter];
-			Variable *v = vmem_getById(&thread->vmem, id);
+			id = t->task.content[++t->task.iter];
+			Variable *v = vmem_getById(&t->vmem, id);
 			if (v == NULL) {
 				Variable v;
 				if (thread->task.content[thread->task.iter - 2] == BYTEKIND_SET) {

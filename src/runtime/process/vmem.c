@@ -3,7 +3,7 @@
 VMem vmem_new(int capacity) {
 	VMem vmem;
 	
-	vmem.loc = calloc (sizeof(Variable), capacity);
+	vmem.loc = calloc (capacity, sizeof(Variable));
 	vmem.capacity = capacity;
 	vmem.count = 0;
 

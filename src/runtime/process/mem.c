@@ -3,7 +3,7 @@
 Mem mem_new(int capacity) {
 	Mem vmem;
 	
-	vmem.loc = (void *)calloc(sizeof(char), capacity);
+	vmem.loc = (void *)calloc(capacity, sizeof(char));
 	vmem.capacity = capacity;
 	vmem.count = 0;
 
