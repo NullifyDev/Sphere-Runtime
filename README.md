@@ -8,7 +8,7 @@ The runtime can only start running while at least one process is running. Proces
 
 The Sphere Compiler can be found [here](https://github.com/NullifyDev/Sphere)
 
-Only through Runtime can SBFs load SBEs.
+Only through Runtime can SBEs load SBFs.
 <br>
 <br>
 ## [TBA] Commands (Non-Freestanding)
