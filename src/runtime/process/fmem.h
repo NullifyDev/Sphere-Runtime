@@ -3,6 +3,8 @@
 
 #include <stdlib.h>
 #include <stdbool.h>
+#include <string.h>
+
 #include "../../sbf/parser/objects/function.h"
 
 typedef struct FMem {
@@ -10,8 +12,11 @@ typedef struct FMem {
     unsigned int capacity, count;
 } FMem;
 
-FMem fmem_new(int size);
-bool fmem_hasId(FMem *fmem, int id);
-Function *fmem_getById (FMem *fmem, int id);
+FMem *fmem_new(unsigned int capacity);
+bool fmem_hasId(FMem *fmem, unsigned int id);
+Function *fmem_getById (FMem *fmem, unsigned int id);
+void _fmem_free(FMem *mem);
+
+void E_fmem_defragment(FMem *fmem);
 
 #endif

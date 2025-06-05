@@ -11,19 +11,25 @@
 #include "process/vmem.h"
 
 #include "./threads.h"
+#include "./task.h"
+
 
 typedef struct Process
 {
 		unsigned int pid, thread_count, threads_active;
 
-		char   *name;
-		Mem     mem;
-		FMem    fmem;
-		VMem    vmem;
-		Thread *threads;
+		char    *name;
+		Mem     *mem;
+		FMem    *fmem;
+		VMem    *vmem;
+		BMem    *bmem;
+		Thread **threads;
 } Process;
 
-Process  *process_new (char *name, int size, int fmem_capacity,
-	 int vmem_capacity, int threads_allocated);
+Process *process_new (char *name, unsigned int mem_capacity, unsigned int fmem_capacity,
+	unsigned int vmem_capacity, unsigned int bmem_capacity, unsigned int threads_allocated);
+
+void process_exit(Process *proc);
+
 
 #endif

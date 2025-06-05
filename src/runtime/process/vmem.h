@@ -1,6 +1,7 @@
 #ifndef VMEM
 #define VMEM
 
+#include <string.h>
 #include <stdlib.h> 
 #include <stdbool.h>
 
@@ -11,11 +12,12 @@ typedef struct VMem {
     unsigned int capacity, count;
 } VMem;
 
-VMem vmem_new(int size);
+VMem *vmem_new(const unsigned int capacity);
 
-Variable *vmem_getById      (VMem **proc, int id );
-bool      vmem_hasId        (VMem *proc, int id );
-bool      _vmem_occupiedAddr(VMem *proc, int loc);
+Variable *vmem_getById      (VMem *proc, const unsigned int id);
+bool      vmem_hasId        (VMem *proc, const unsigned int id );
+bool      _vmem_occupiedAddr(VMem *proc, const unsigned int loc);
 bool      _vmem_isEmpty     (Variable *var);
+void      _vmem_free        (VMem *mem);
 
 #endif

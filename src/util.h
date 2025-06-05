@@ -1,22 +1,27 @@
 #ifndef UTIL
 #define UTIL
 
-inline static int isAlphaNum(char *l) {
-	int c = (int)*l;
-    return (c >= 48 && c <= 57) || // 0-9
-           (c >= 65 && c <= 90) || // a-z
-           (c >= 97 && c <= 122);  // A-Z
+#include <stdio.h>
+
+inline static int isAlphaNum(char l) {
+    return (l >= '0' && l <= '9') ||
+           (l >= 'a' && l <= 'z') ||
+           (l >= 'A' && l <= 'Z');
 }
 
-inline static int isAlpha(char *l) {
-	int c = (int)*l;
-    return (c >= 65 && c <= 90) || // a-z
-           (c >= 97 && c <= 122);  // A-Z
+inline static int isAlpha(char l) {
+    return (l >= 'a' && l <= 'z') ||
+           (l >= 'A' && l <= 'Z');
 }
 
-static int isNum(char *l) {
-	int c = (int)*l;
-    return c >= 48 && c <= 57;   // 0-9
+inline static int isNum(char l) {
+    return l >= '0' && l <= '9';   // 0-9
 }
+
+inline static int ctoi(char l) {
+    printf("ctoi: %d %c\n", (int)l, l);
+    return (char)l - '0';
+}
+
 
 #endif

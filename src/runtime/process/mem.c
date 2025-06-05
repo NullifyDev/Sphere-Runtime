@@ -1,18 +1,18 @@
 #include "mem.h"
 
-Mem mem_new(int capacity) {
-	Mem vmem;
+Mem *mem_new(unsigned int capacity) {
+	Mem *vmem = calloc(1, sizeof(Mem));
 	
-	vmem.loc = (void *)calloc(capacity, sizeof(char));
-	vmem.capacity = capacity;
-	vmem.count = 0;
+	vmem->loc = (void *)calloc(capacity, sizeof(char));
+	vmem->capacity = capacity;
+	vmem->count = 0;
 
 	return vmem;
 }
 
-int mem_queryavailable(Mem *mem, int length)
+int mem_queryavailable(Mem *mem, unsigned int length)
 {
-	int memlen = mem->capacity;
+	unsigned int memlen = mem->capacity;
 
 	if (memlen == 0) { return 0; }
 	if (length >= memlen) { return 0; }
@@ -31,4 +31,11 @@ int mem_queryavailable(Mem *mem, int length)
 		i++;
 	}
 	return 0;
+}
+
+void _mem_free(Mem *mem) {
+	mem->count = 0;
+	mem->capacity = 0;
+ 	memset(mem->loc, 0, mem->capacity);
+	free(mem->loc); 
 }

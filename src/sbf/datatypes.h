@@ -7,16 +7,27 @@
     #include "./../commands/print.h"
 #endif
 
-#define SIZE_T long unsigned int;
+// Negative Enums are Internal
 typedef enum ByteKind {
+    BYTEKIND_STATUS = -2,
+    BYTEKIND_ERROR,
+    
     BYTEKIND_NOOP,
-    BYTEKIND_HLT,
+    BYTEKIND_NULL,
     BYTEKIND_VOID,
     BYTEKIND_INT,
     BYTEKIND_FLOAT,
     BYTEKIND_BOOL,
     BYTEKIND_CHAR,
+    DATATYPE_INT,
+    DATATYPE_FLOAT,
+    DATATYPE_BOOL,
+    DATATYPE_CHAR,
+    DATATYPE_STRUCT,
+    DATATYPE_VOID,
+    DATATYPE_NONE,
     BYTEKIND_VAR,
+    BYTEKIND_ARR,
     BYTEKIND_FUNCTION,
     BYTEKIND_STRUCT,
     BYTEKIND_CALL,
@@ -25,8 +36,13 @@ typedef enum ByteKind {
     BYTEKIND_MOV,
     BYTEKIND_INCR,
     BYTEKIND_DECR,
+    
     BYTEKIND_SET,
+    
     BYTEKIND_GET,
+    BYTEKIND_GETVAL,
+    BYTEKIND_GETLOC,
+
     BYTEKIND_CMP,
     BYTEKIND_EQ,
     BYTEKIND_NE,
@@ -44,15 +60,26 @@ typedef enum ByteKind {
     BYTEKIND_LOC,
     BYTEKIND_INFO,
     BYTEKIND_MODULO,
+    BYTEKIND_RET,
 
+    BYTEKIND_HLT,
 } ByteKind;
 
-typedef enum DataType {
-    DATATYPE_VOID = 2,
-    DATATYPE_INT,
-    DATATYPE_FLOAT,
-    DATATYPE_BOOL,
-    DATATYPE_CHAR,
-} DataType;
+int byte_getKind(void*);
+const char *datatype_getDataType(ByteKind bk);
+
+// typedef enum DataType {
+//     // DataType reflects the enum value of ByteKind 
+//     DATATYPE_INT = -7,
+//     DATATYPE_FLOAT,
+//     DATATYPE_BOOL,
+//     DATATYPE_CHAR,
+//     DATATYPE_STRUCT,
+//     DATATYPE_VOID,
+//     DATATYPE_NONE
+// } DataType;
+
+// ByteKind bytekind_toDatatype(int b);
+// ByteKind datatype_toBytekind(int b);
 
 #endif
