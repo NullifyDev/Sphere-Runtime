@@ -36,7 +36,8 @@ Function *fmem_getById (FMem *fmem, unsigned int id)
 	return NULL;
 }
 
-void E_fmem_defragment(FMem *fmem) {
+// Experimental - therefore uselesss for the time being
+/* void E_fmem_defragment(FMem *fmem) {
 	unsigned int i = 0, j = 0;
 	while (i < fmem->capacity) 
 	{
@@ -57,7 +58,7 @@ void E_fmem_defragment(FMem *fmem) {
 		}
 		i++;
 	}
-}
+} */
 
 void _fmem_free(FMem *mem) {
 	mem->count = 0;

@@ -49,10 +49,6 @@ Variable *vmem_getById(VMem *vmem, const unsigned int id)
 
 	unsigned int i = 0;
     while (i < v.count) {
-        if (&(v.loc[i]) == NULL) {
-            i++;
-            continue;
-        }
         if (v.loc[i].id == id) { return &(v.loc[i]); }
         
         i++;
