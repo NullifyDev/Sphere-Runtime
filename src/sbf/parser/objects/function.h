@@ -9,8 +9,8 @@
 
 typedef struct Function
 {
-    unsigned int id;
-    Block *contents;
+    unsigned int id,
+                 blockId;
     Value *returnAddr; // address in the data memory (return address are reserved first thing before any operations)
 } Function;
 

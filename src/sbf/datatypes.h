@@ -68,18 +68,4 @@ typedef enum ByteKind {
 int byte_getKind(void*);
 const char *datatype_getDataType(ByteKind bk);
 
-// typedef enum DataType {
-//     // DataType reflects the enum value of ByteKind 
-//     DATATYPE_INT = -7,
-//     DATATYPE_FLOAT,
-//     DATATYPE_BOOL,
-//     DATATYPE_CHAR,
-//     DATATYPE_STRUCT,
-//     DATATYPE_VOID,
-//     DATATYPE_NONE
-// } DataType;
-
-// ByteKind bytekind_toDatatype(int b);
-// ByteKind datatype_toBytekind(int b);
-
 #endif

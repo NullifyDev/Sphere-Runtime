@@ -1,0 +1,16 @@
+src/sbf/bytecode_init.c
+src/sbf/parser/bytekind/var.c
+src/sbf/parser/instructions/cmp.c
+src/sbf/parser/datatype/value.c
+src/sbf/main.c
+src/sbf/bytemgr.c
+src/sbf/datatypes.c
+src/runtime/process.c
+src/runtime/error.c
+src/runtime/misc/stack.c
+src/runtime/task.c
+src/runtime/threads.c
+src/runtime/process/fmem.c
+src/runtime/process/mem.c
+src/runtime/process/vmem.c
+src/runtime/process/bmem.c

@@ -25,28 +25,22 @@ inline static Block *block_new(unsigned int id, unsigned int count, unsigned int
     blk->instructions = NULL;
     return blk;
 }
-// inline static void block_load(Block *block, unsigned char *instructions)
 inline static void block_load(Block *block, unsigned char *instructions)
 {   
     block->instructions = instructions;
 }
 
-inline static Function *func_new(Thread *t, unsigned int id, Block *block) 
+inline static Function *func_new(Thread *t, unsigned int id, int block_id) 
 {
-    if (block == NULL) {
-        printf("func_new: block is null - aborting\n");
-        return NULL;
-    }
-
     if (t->fmem->count >= t->fmem->capacity) 
     {
-        printf("func_new: function list is full can only hold %d amount of functions\n", t->fmem->capacity);
+        printf("\033[1m\033[38;2;255;0;0mERROR:\033[0m func_new: function list is full can only hold %d amount of functions\n", t->fmem->capacity);
         return NULL;
     }
 
     Function *f = &t->fmem->loc[t->fmem->count];
     f->id = id;
-    f->contents = block;
+    f->blockId = block_id;
 
     return f;
 }

@@ -15,13 +15,13 @@ typedef struct BMem {
 
 
 
-int       _bmem_firstUnused (BMem *bmem);
+Block    *_bmem_firstUnused (BMem *bmem);
 bool      _bmem_occupiedAddr(BMem *bmem, const unsigned int loc);
 bool      _bmem_isEmpty     (Block *var);
 void      _bmem_free        (BMem *bmem);
 
 BMem      *bmem_new         (            const unsigned int capacity);
-void       bmem_add         (BMem *bmem, Block *blk);
+Block     *bmem_add         (BMem *bmem, Block *blk);
 Block     *bmem_getById     (BMem *bmem, const unsigned int id );
 bool       bmem_hasId       (BMem *bmem, const unsigned int id );
 

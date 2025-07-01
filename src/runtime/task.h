@@ -13,14 +13,6 @@ typedef struct Task {
     void *returnAddress;
 } Task;
 
-// typedef struct Task {
-//     unsigned int length, 
-//                  iter,
-//                 *content,
-//                 *returnAddress;
-
-// } Task;
-
 void _task_free(Task *t);
 void _task_dumpinsts(Task *t);
 

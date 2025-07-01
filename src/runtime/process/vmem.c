@@ -24,21 +24,20 @@ bool _vmem_occupiedAddr(VMem *vmem, const unsigned int loc)
     while (i < vmem->count) {
 		Variable *var = &vmem->loc[i];
 		printf("var == NULL: %s | _vmem_isEmpty(var): %s", var == NULL ? "true" : "false", _vmem_isEmpty(var) ? "true" : "false");
-		if (_vmem_isEmpty(var)) {
+		if (_vmem_isEmpty(var))
 			return true;
-		}
 	}
 	return false;
 }
  
 bool vmem_hasId(VMem *vmem, const unsigned int id)
 {
-	if (vmem->count == 0) { return false; }
+	if (vmem->count == 0) return false;
 
 	unsigned int i = 0;
 	while (i < vmem->count) {
 		if (&(vmem->loc[i]) == NULL) { i++; continue; }
-		if (vmem->loc[i++].id != id) { continue; }
+		if (vmem->loc[i++].id != id) continue;
 		return true;
 	}
 	return false;

@@ -6,8 +6,6 @@
 #include <stdlib.h>
 #include <stdbool.h>
 
-// Volatile "variable" - lasts for only one operation 
-// (gets deleted/destroyed immediately after).
 typedef struct Value 
 {
     ByteKind type;

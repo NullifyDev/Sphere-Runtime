@@ -17,7 +17,6 @@
 typedef struct Process
 {
 		unsigned int pid, thread_count, threads_active;
-
 		char    *name;
 		Mem     *mem;
 		FMem    *fmem;

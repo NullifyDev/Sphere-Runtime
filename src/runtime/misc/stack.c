@@ -11,40 +11,39 @@ Stack *stack_new(unsigned int capacity) {
 
 void stack_pop(Stack *stack) 
 {
-    if (stack->count > 0) 
-        stack->content[stack->count--] = 0;
-    else 
+    if (stack->count <= 0) {
         printf("Runtime: stack: Unable to remove top-most item - already empty (skipping)\n");
+        return;
+    }
+
+    free(stack->content[stack->count--]);
 }
 
 void stack_push(Stack *stack, void *item) {
-    if(stack->count < stack->length)
-        stack->content[stack->count++] = item;
-    else {
+    if(stack->count >= stack->length) {
         printf("Runtime: stack: Unable to add item to stack - already full (skipping)\n");
+        return;
     }
+
+    stack->content[stack->count++] = item;
 }
 
 void *stack_getTop(Stack *s) {
-    //  printf("[%p] length: %d | count: %d\n", s, s->length, s->count);
     return s->content[s->count-1];
 }
 
 void stack_flush(Stack *s)
 {
-    while(s->count > 0) {
-        s->content[s->count--] = NULL;
-    }
-    s->content[s->count] = NULL;
-    
+    while(s->count > 0)
+        stack_pop(s);
+
+    stack_pop(s);
 }
 
 void _stack_free(Stack *s)
 {
     stack_flush(s);
-    s->count = 0;
-    s->length = 0;
-    s->content = NULL;
+    free(s);
 }
 
 // void *stack_getTop(Stack *stack) {

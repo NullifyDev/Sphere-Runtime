@@ -28,8 +28,8 @@ typedef struct Thread
 } Thread;
 
 Thread *thread_new(Mem *mem, FMem *fmem, VMem *vmem, BMem *bmem);
-// void thread_loadTask(Thread *t, unsigned char *sbe, unsigned int length);
 void thread_loadTask(Thread *t, unsigned char *sbe, unsigned int length);
+void thread_popTask(Thread *t);
 
 void thread_clearTask(Thread *t);
 void _thread_free(Thread *t);

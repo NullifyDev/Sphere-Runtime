@@ -1,9 +1,10 @@
 #ifndef VALUE
 #define VALUE
 
-typedef struct Value {
-    int pos;
-    int len;
+typedef struct Value 
+{
+    int pos, 
+        len;
 } Value;
 
 #endif

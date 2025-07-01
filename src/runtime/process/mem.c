@@ -20,7 +20,6 @@ int mem_queryavailable(Mem *mem, unsigned int length)
 	unsigned int i = 0, j = 0;
 	while (i < memlen) {
 		if (i + length >= memlen) { return 0; }
-		// if (mem->loc[i] != 0)  { break; }
 
 		while (j < memlen - i - 1) {
 			if (j >= length) { return i; }

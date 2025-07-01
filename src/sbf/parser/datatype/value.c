@@ -30,8 +30,3 @@ void value_free(Value *v)
     v->type = 0;
     free(v);
 }
-
-// void value_toVariable(Value *val, Variable *var) 
-// {
-//      val->value
-// }

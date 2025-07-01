@@ -1,4 +1,5 @@
 #include "bytemgr.h"
+#include "bytecode_init.h"
 
 bool atEnd(Stack *t, unsigned int ahead) {
 	Task *task = (Task*)stack_getTop(t);
@@ -39,7 +40,7 @@ void *bytecode_mgr(Thread *thread, unsigned int inst_count)
 {
 	Thread *t = thread;
 	Task *task = (Task *)stack_getTop(t->task);
-	unsigned int i = 0, j = 0, len = 0;
+	unsigned int i = 0, j = 0, len = 0, end = 0;
 	unsigned char id = 0;
 	while (i < inst_count) 
 	{
@@ -50,12 +51,12 @@ void *bytecode_mgr(Thread *thread, unsigned int inst_count)
 				next(t->task, 1);
 				return bytecode_mgr(t, 1);
 			case BYTEKIND_OUTLN:
-				unsigned int end = 0;
+				end = 0;
 				char c = next(t->task, 2);
 				switch (c) 
 				{
 					case BYTEKIND_VAR:
-						Variable *v = vmem_getById(t->vmem, next(t->task, 1)); 
+						Variable *v = vmem_getById(t->vmem, next(t->task, 1));
 						end = v->length + v->pos;
 						j = v->pos;
 						break;
@@ -91,27 +92,18 @@ void *bytecode_mgr(Thread *thread, unsigned int inst_count)
 				
 				return value_newV(BYTEKIND_INT, (*one->value % *two->value));
 			
-			/* REDUNDANT - bytecode_init() already does this
 			case BYTEKIND_BLOCK:
-				Block *blk = (Block *)calloc(1, sizeof(Block));
-
-				blk->count = next(t->task, 1);
-				blk->length = next(t->task, 1);
-
-				unsigned int j = 0;
-				unsigned char *insts = calloc(blk->length, sizeof(char));
-
-				while (j < blk->length)
-					insts[j++] = next(t->task, 1);
-
-				blk->instructions = insts;
-				next(t->task, 1);
-				return blk;
-			*/
+				// _block_getById(t, next(t->task, 1));
+				_block_runid(t, 
+					_block_getById(t, 
+						next(t->task, 1)
+					)->id
+				);
+				break;
 
 			case BYTEKIND_INCR:
-				switch (next(t->task, 1)) {
-
+				switch (next(t->task, 1)) 
+				{
 					case DATATYPE_INT:
 					case DATATYPE_FLOAT:
 					case DATATYPE_CHAR:
@@ -177,9 +169,11 @@ void *bytecode_mgr(Thread *thread, unsigned int inst_count)
 
 			case BYTEKIND_FUNCTION:
 				id = next(t->task, 1);
-				if (!fmem_hasId(t->fmem, id) == false) 
+				if (!fmem_hasId(t->fmem, id) == false)
 				{
 					printf("no such function %d\n", id);
+
+					break;
 				}
 				break;
 			
@@ -210,21 +204,18 @@ void *bytecode_mgr(Thread *thread, unsigned int inst_count)
 				// error_out(BYTEKIND_VAR << 8 | 2);
 				break;
 			case BYTEKIND_LOOP:
-				next(t->task, 1);
-				Block *cond = bytecode_mgr(t, 1),
-					  *body = bytecode_mgr(t, 1);
+				Block *cond = _block_getById(t, next(t->task, 2)),
+					  *body = _block_getById(t, next(t->task, 2));
 				
-				while ((bool)_block_run(t, cond) == true) 
-				{
+				while (*(bool*)_block_run(t, cond) == true)
 					_block_run(t, body);
-				}
+				
 				break;
 				
 			case BYTEKIND_CMP:
-				
-				Value *lhs = _cmp_parseObj(t);
-				Value *rhs = _cmp_parseObj(t);
-				Value *con = _cmp_parseObj(t);
+				Value *lhs = _cmp_parseObj(t),
+					  *rhs = _cmp_parseObj(t),
+					  *con = _cmp_parseObj(t);
 				// next(t->task, 1);
 
 				if (peek(t->task, 1) == BYTEKIND_BLOCK) {
@@ -248,14 +239,14 @@ void *bytecode_mgr(Thread *thread, unsigned int inst_count)
 					rhs, 
 					con
 				));
-				
+				next(t->task, 1);
 				break;
 
 			default:
 				if (atEnd(t->task, 1))
 					return value_newV(BYTEKIND_STATUS, 0);
 
-				printf(	"[INTERNAL RUNTIME ERROR]: Unknown bytecode %d at %d! stack depth iter: %d (#%d) | iter: %d \nPlease create an issue on the github repository (https://github.com/NullifyDev/Sphere/issues)!\n",
+				printf(	"\033[1m\033[38;2;255;0;0mERROR:\033[0m bytecode_mgr: Unknown bytecode %d at %d! stack depth iter: %d (#%d) | iter: %d \nPlease create an issue on the github repository (https://github.com/NullifyDev/Sphere/issues)!\n",
 					task->content[task->iter],
 					task->iter,
 					t->task->count-1,

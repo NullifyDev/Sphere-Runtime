@@ -71,8 +71,10 @@ inline static Value *_cmp_parseObj(Thread *thread) {
             Function *f = fmem_getById(thread->fmem, next(thread->task, 1));
             if (f == NULL) return NULL;
             
-            thread_loadTask(thread, f->contents->instructions, f->contents->length);
-            val = (Value *)bytecode_mgr(thread, f->contents->length);
+            Block *b = bmem_getById(thread->bmem, f->blockId);
+
+            thread_loadTask(thread, b->instructions, b->length);
+            val = (Value *)bytecode_mgr(thread, b->length);
 
             free(val);
             // next(thread->task, 1);
@@ -133,18 +135,60 @@ inline static int _cmp_compare(Thread *t, Value *lhs, Value *rhs, Value *cond)
             break;
     }
 
-    value_free(lhs);
-    value_free(rhs);
-    value_free(cond);
-
     return res;
 }
 
 inline static void *_block_run(Thread *t, Block *b)
 {
-    next(t->task, 1);
+    if (b == NULL) 
+    {
+        printf("_block_run: block parameter is null\n");
+        return NULL;
+    }
+
+    // next(t->task, 1);
+    if (b->length < 1 || b->count < 1) 
+    {
+        next(t->task, 1);
+        return NULL;
+    }
+
     thread_loadTask(t, b->instructions, b->length);
+    void *res = bytecode_mgr(t, b->count);
+    thread_popTask(t);
+    return res;
+}
+
+inline static void *_block_runid(Thread *t, unsigned int bid)
+{
+    Block *b = bmem_getById(t->bmem, bid);
+    if (b == NULL) 
+    {
+        printf("_block_runid: parameter \"bid\" with value %d does not refer to a declared block\n", bid);
+        return NULL;
+    }
+
+    // next(t->task, 1);
+    if (b->length < 1 || b->count < 1) 
+    {
+        next(t->task, 1);
+        return NULL;
+    }
+
+    thread_loadTask(t, b->instructions, b->length);
+    next(t->task, 1);
     return bytecode_mgr(t, b->count);
+}
+
+inline static Block *_block_getById(Thread *t, unsigned int id)
+{
+    unsigned int i = 0;
+    while(i < t->bmem->capacity) {
+        if (t->bmem->loc[i].id == id) return &t->bmem->loc[i];
+        i++;
+    }
+
+    return NULL;
 }
 
 inline static int _func_run(Thread *t, int id)
@@ -155,7 +199,7 @@ inline static int _func_run(Thread *t, int id)
     }
 
     Function *f = fmem_getById(t->fmem, id);
-    _block_run(t, f->contents);
+    _block_runid(t, f->blockId);
     return 0;
 }
 

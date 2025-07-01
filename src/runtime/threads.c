@@ -13,18 +13,15 @@ Thread *thread_new(Mem *mem, FMem *fmem, VMem *vmem, BMem *bmem)
     t->fmem = fmem;
     t->vmem = vmem;
     t->bmem = bmem;
-
     t->isActive = true;
-    
     t->task = stack_new(255);
 
     return t;
 }
 
 void thread_loadTask(Thread *t, unsigned char *sbe, unsigned int length)
-// void thread_loadTask(Thread *t, unsigned char *sbe, unsigned int length)
 {
-    Task *task = calloc(sizeof(Task), 1);
+    Task *task = calloc(1, sizeof(Task));
     task->content = sbe;
     task->length  = length;
     task->iter    = 0;
@@ -32,12 +29,17 @@ void thread_loadTask(Thread *t, unsigned char *sbe, unsigned int length)
     stack_push(t->task, (void*)task);
 }
 
-void _thread_free(Thread *t) 
+void thread_popTask(Thread *t) 
+{
+    stack_pop(t->task);
+}
+
+void _thread_free(Thread *t)
 {
     _stack_free(t->task);
     free(t->fmem);
     free(t->vmem);
     free(t->mem);
-    
+
     t->isActive = false;
 }

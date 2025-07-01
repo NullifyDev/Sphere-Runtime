@@ -52,12 +52,7 @@ void E_fmem_defragment(FMem *fmem) {
 			while (i < fmem->capacity)
 				fmem->loc[i++] = (Function) {	
 					.id = 0, 
-					.contents = &(Block) { 
-						0, 
-						0, 
-						0, 
-						0
-					},
+					.blockId = 0,
 					.returnAddr = &(Value){ 0, NULL, 0, 0 }
 				};
 

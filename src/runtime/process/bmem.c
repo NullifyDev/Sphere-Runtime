@@ -12,38 +12,41 @@ BMem *bmem_new(const unsigned int capacity)
 	return bmem;
 }
 
-void bmem_add(BMem *bmem, Block *blk) 
+Block *bmem_add(BMem *bmem, Block *blk) 
 {
-    if (!_bmem_firstUnused(bmem)) 
+    if (_bmem_firstUnused(bmem) == NULL) 
     {
-        printf("bmem is full - aborting block addition\n");
-        return;   
+        printf("bmem is full - aborting\n");
+        exit(1);
+		return NULL; 
     }
 
-    bmem->loc[_bmem_firstUnused(bmem)] = *blk;
+	Block *b = _bmem_firstUnused(bmem);
+	*b = *blk;
+	return b;
 }
 
 bool _bmem_isEmpty(Block *blk) {
 	return blk->id == 0 && blk->length == 0 && blk->count == 0 && blk->instructions == NULL;
 }
 
-int _bmem_firstUnused(BMem *bmem) 
+Block *_bmem_firstUnused(BMem *bmem) 
 {
     unsigned int i = 1;
     while (i < bmem->capacity) 
     {
         Block *blk = &bmem->loc[i];
-        if (blk->length == 0 && blk->count == 0 && blk->instructions == NULL) return i;
+        if (blk->length == 0 && blk->count == 0 && blk->instructions == 0) return blk;
         i++;
     }
-    return 0;
+    return NULL;
 }
 
 bool _bmem_isFull(BMem *bmem) {
     return bmem->count == bmem->capacity;
 }
 
-bool _bmem_occupiedAddr(BMem *bmem, const unsigned int loc)
+bool _bmem_freeAddr(BMem *bmem, const unsigned int loc)
 {
     if (bmem->count == 0) return NULL;
 
@@ -51,9 +54,7 @@ bool _bmem_occupiedAddr(BMem *bmem, const unsigned int loc)
     while (i < bmem->count) {
 		Block *blk = &bmem->loc[i];
 		printf("blk == NULL: %s | _bmem_isEmpty(blk): %s", blk == NULL ? "true" : "false", _bmem_isEmpty(blk) ? "true" : "false");
-		if (_bmem_isEmpty(blk)) {
-			return true;
-		}
+		if (_bmem_isEmpty(blk)) return true;
 	}
 	return false;
 }
@@ -78,10 +79,7 @@ Block *bmem_getById(BMem *bmem, const unsigned int id)
 
 	unsigned int i = 0;
     while (i < v.count) {
-        if (&(v.loc[i]) == NULL) {
-            i++;
-            continue;
-        }
+        if (&(v.loc[i]) == NULL) { i++; continue; }
         if (v.loc[i].id == id) { return &(v.loc[i]); }
         
         i++;
