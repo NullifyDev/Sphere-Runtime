@@ -65,7 +65,6 @@ bool bmem_hasId(BMem *bmem, const unsigned int id)
 
 	unsigned int i = 0;
 	while (i < bmem->count) {
-		if (&(bmem->loc[i]) == NULL) { i++; continue; }
 		if (bmem->loc[i++].id != id) { continue; }
 		return true;
 	}
@@ -79,7 +78,6 @@ Block *bmem_getById(BMem *bmem, const unsigned int id)
 
 	unsigned int i = 0;
     while (i < v.count) {
-        if (&(v.loc[i]) == NULL) { i++; continue; }
         if (v.loc[i].id == id) { return &(v.loc[i]); }
         
         i++;

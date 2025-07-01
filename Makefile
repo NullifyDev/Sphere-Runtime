@@ -1,6 +1,6 @@
 # Sphere Binary File
 
-CFLAGS = -std=c23 -ffp-contract=fast -ffast-math -g -Wall -pedantic -Werror -Wextra -Wno-newline-eof -Wno-unsequenced -Wno-return-stack-address -Wno-format-pedantic
+CFLAGS = -std=c23 -ffp-contract=fast -ffast-math -g -Wall -pedantic -Werror -Wextra
 CSOURCE = $(shell find src/sbf src/runtime -name '*.c')
 
 OBJ = $(patsubst src/%.c, bin/runtime.o, $(CSOURCE))

@@ -36,7 +36,6 @@ bool vmem_hasId(VMem *vmem, const unsigned int id)
 
 	unsigned int i = 0;
 	while (i < vmem->count) {
-		if (&(vmem->loc[i]) == NULL) { i++; continue; }
 		if (vmem->loc[i++].id != id) continue;
 		return true;
 	}

@@ -17,7 +17,6 @@ bool fmem_hasId(FMem *fmem, unsigned int id)
 
 	unsigned int i = 0;
 	while (i < fmem->count) {
-		if (&(fmem->loc[i]) == NULL) { continue; }
 		if (fmem->loc[i++].id != id) { continue; }
 		return true;
 	}
@@ -30,7 +29,6 @@ Function *fmem_getById (FMem *fmem, unsigned int id)
 
 	unsigned int i = 0;
 	while (i < fmem->count) {
-		if (&fmem->loc[i] == NULL) { continue; }
 		if (fmem->loc[i].id != id) { continue; }
 		return &fmem->loc[i];
 	}
@@ -45,7 +43,6 @@ void E_fmem_defragment(FMem *fmem) {
 		if (&fmem->loc[i] == NULL) {
 			j = i;
 			while (++j < fmem->capacity) {
-				if (&fmem->loc[j] == NULL) continue;
 				fmem->loc[i++] = fmem->loc[j];
 			}
 				

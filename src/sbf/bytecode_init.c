@@ -100,7 +100,7 @@ void *bytecode_init(Thread *t, unsigned int inst_count)
 						break;
                 }
                 break;
-				
+
             case BYTEKIND_BLOCK:
                 
 				unsigned int count = next(t->task, 1),

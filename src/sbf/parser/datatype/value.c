@@ -10,7 +10,7 @@ Value *value_new(ByteKind type, int length, char *value)
     return v;
 }
 
-Value *value_newV(int type, char value) 
+Value *value_newV(ByteKind type, char value) 
 {
     Value *v = (Value*)calloc(1, sizeof(Value));
     v->type = type;
