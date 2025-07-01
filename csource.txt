@@ -1,6 +1,7 @@
 src/sbf/bytecode_init.c
 src/sbf/parser/bytekind/var.c
 src/sbf/parser/instructions/cmp.c
+src/sbf/parser/block.c
 src/sbf/parser/datatype/value.c
 src/sbf/main.c
 src/sbf/bytemgr.c
