@@ -4,7 +4,7 @@ Stack *stack_new(unsigned int capacity) {
     Stack *s = calloc(1, sizeof(Stack));
     s->length = capacity;
     s->count = 0;
-    s->content = calloc(capacity, 1); // 1 because void*
+    s->content = calloc(capacity, sizeof(void*));
 
     return s;
 }
